@@ -96,6 +96,7 @@ public class MainSrScript : MonoBehaviour
     }
 
     //Stop editing
+    //AQUI DEBE INCLUIRSE LO DE GUARDAR LA INFORMACION
     public void OnWriteEnd(){
         Debug.Log("END editing");
 
