@@ -9,7 +9,7 @@ public class LevelBtnController : MonoBehaviour
     //se consiguen de lo que esta guardado
     int currentLevel = 1;
     int currentEtapa = 1;
-    int edad;
+    int edad = 4;
     /////////////////////////////////////////
     private int i,j;
     // Start is called before the first frame update
@@ -18,7 +18,8 @@ public class LevelBtnController : MonoBehaviour
     public GoalsStates last;
     //Menu Canvas Objects
     public GameObject Desayuno1,Desayuno2, Comida1,Comida2,Comida3, Cena1,Cena2, MetaScr,BadgesScr,SabiasScr, Instrucc;
-    
+    public int frutaBadge, carneBadge, cerealBadge, lecheBadge, verduBadge, dulceBadge, recoBadge;
+    public GameObject rec1,rec2,rec3;
     public GameObject SabiasQ0,SabiasQ1,SabiasQ2,SabiasQ3,SabiasQ4,SabiasQ5,SabiasQ6,SabiasQ7,SabiasQ8,SabiasQ9,SabiasQ10,SabiasQ11,SabiasQ12,SabiasQ13,SabiasQ14,SabiasQ15;
 
 
@@ -27,9 +28,10 @@ public class LevelBtnController : MonoBehaviour
     void Start()
     {
 
-        if(PlayerPrefs.GetInt("currentLevel") != 0 && PlayerPrefs.GetInt("currentEtapa") != 0 ){
-            currentLevel = PlayerPrefs.GetInt("currentLevel",0);
-            currentEtapa = PlayerPrefs.GetInt("currentEtapa",0);
+            current = GoalsStates.Metas;
+       if(PlayerPrefs.GetInt("currentLevel") != 0 && PlayerPrefs.GetInt("currentEtapa") != 0 ){
+            currentLevel = PlayerPrefs.GetInt("currentLevel");
+            currentEtapa = PlayerPrefs.GetInt("currentEtapa");
             edad = int.Parse(PlayerPrefs.GetString("edad"));
         }
         else{
@@ -38,8 +40,8 @@ public class LevelBtnController : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        Debug.Log("Level: "+PlayerPrefs.GetInt("currentLevel")+" Etapa: "+PlayerPrefs.GetInt("currentEtapa")+" Edad: "+PlayerPrefs.GetString("edad"));
-         current = GoalsStates.Metas;
+       // Debug.Log("Level: "+PlayerPrefs.GetInt("currentLevel")+" Etapa: "+PlayerPrefs.GetInt("currentEtapa")+" Edad: "+PlayerPrefs.GetString("edad"));
+         
         /*Con esto al cargarse se ponen todos los botones desactivados */
         for(i=1; i<=7;i++){
             for(j=1; j<=3; j++){
@@ -63,8 +65,19 @@ public class LevelBtnController : MonoBehaviour
                
             }
     
+        frutaBadge = PlayerPrefs.GetInt("frutaBadge");
+        carneBadge = PlayerPrefs.GetInt("carneBadge");
+        cerealBadge = PlayerPrefs.GetInt("cerealBadge");
+        lecheBadge = PlayerPrefs.GetInt("lecheBadge");
+        verduBadge = PlayerPrefs.GetInt("verduraBadge");
+        dulceBadge = PlayerPrefs.GetInt("dulceBadge");
+        recoBadge = PlayerPrefs.GetInt("retosCant");
+      
+
         AllInactive();
-        
+        SetAllInactiveBadges();
+        SetUpBadges();
+  
     }
 
 
@@ -72,7 +85,9 @@ public class LevelBtnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       switch (current)
+
+
+      switch (current)
         {
             case GoalsStates.Desayuno:
                 Comida1.SetActive(false);
@@ -239,6 +254,7 @@ public class LevelBtnController : MonoBehaviour
     //En el mapa si se presiona el trofeo lleva al canvas de medallas
     public void OnBadges()
     {
+    
         Debug.Log("Badges");
         current = GoalsStates.Badges;
     }
@@ -375,5 +391,91 @@ public class LevelBtnController : MonoBehaviour
                 Debug.Log(i+""+j+"BTN true");
             }
     
-    }       
+    }     
+
+    public void SetAllInactiveBadges(){
+        for(i=0; i<=10; i++){
+            if(GameObject.Find("fruta"+i) != null){
+                GameObject.Find("fruta"+i).GetComponent<Button>().interactable = false;
+            }
+            if(GameObject.Find("carne"+i) != null){
+                GameObject.Find("carne"+i).GetComponent<Button>().interactable = false;
+            }
+            if(GameObject.Find("cereal"+i) != null){
+                GameObject.Find("cereal"+i).GetComponent<Button>().interactable = false;
+            }
+            if(GameObject.Find("leche"+i) != null){
+                GameObject.Find("leche"+i).GetComponent<Button>().interactable = false;
+            }
+            if(GameObject.Find("verdu"+i) != null){
+                GameObject.Find("verdu"+i).GetComponent<Button>().interactable = false;
+            }
+        }
+
+        for(i=0; i<=15; i++){
+            if(GameObject.Find("dulce"+i) != null){
+                GameObject.Find("dulce"+i).GetComponent<Button>().interactable = false;
+            }
+        }
+
+        GameObject.Find("Rec1").SetActive(false);
+        GameObject.Find("Rec2").SetActive(false);
+        GameObject.Find("Rec3").SetActive(false);
+
+    }  
+
+    public void SetUpBadges(){
+        for(i=0; i<=frutaBadge; i++){
+            if(GameObject.Find("fruta"+i) != null){
+                GameObject.Find("fruta"+i).GetComponent<Button>().interactable = true;
+                Debug.Log(i);
+            }
+        }
+        for(i=0; i<=carneBadge; i++){
+            if(GameObject.Find("carne"+i) != null){
+                GameObject.Find("carne"+i).GetComponent<Button>().interactable = true;
+                Debug.Log(i);
+            }
+        }
+        for(i=0; i<=cerealBadge; i++){
+           if(GameObject.Find("cereal"+i) != null){
+                GameObject.Find("cereal"+i).GetComponent<Button>().interactable = true;
+                Debug.Log(i);
+            }
+        }
+        for(i=0; i<=lecheBadge; i++){
+            if(GameObject.Find("leche"+i) != null){
+                GameObject.Find("leche"+i).GetComponent<Button>().interactable = true;
+                Debug.Log(i);
+            }
+        }
+        for(i=0; i<=verduBadge; i++){
+           if(GameObject.Find("verdu"+i) != null){
+                GameObject.Find("verdu"+i).GetComponent<Button>().interactable = true;
+                Debug.Log(i);
+            }
+        }
+        for(i=0; i<=dulceBadge; i++){
+            if(GameObject.Find("dulce"+i) != null){
+                GameObject.Find("dulce"+i).GetComponent<Button>().interactable = true;
+                Debug.Log(i);
+            }
+        }
+        
+        if(recoBadge == 1){
+            rec1.SetActive(true);
+            rec2.SetActive(false);
+            rec3.SetActive(false);
+        }
+        if(recoBadge == 3){
+            rec1.SetActive(true);
+            rec2.SetActive(true);
+            rec3.SetActive(false);
+        }
+        if(recoBadge == 7){
+            rec1.SetActive(true);
+            rec2.SetActive(true);
+            rec3.SetActive(true);
+        }
+    }
 }

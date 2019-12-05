@@ -749,7 +749,7 @@ Canvas:
   m_GameObject: {fileID: 174319086}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -813,7 +813,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -477, y: 1240.0001}
+  m_AnchoredPosition: {x: -484.8, y: 1101.0002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180325957
@@ -1854,7 +1854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -317.66, y: -1353}
+  m_AnchoredPosition: {x: -309, y: -1189}
   m_SizeDelta: {x: 549.62, y: 26.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &636218064
@@ -2023,7 +2023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.8, y: 1240}
+  m_AnchoredPosition: {x: 1, y: 1101}
   m_SizeDelta: {x: 555.7, y: 137.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &710164511
@@ -2960,7 +2960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1054829946
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2977,8 +2977,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -70.6, y: 957}
-  m_SizeDelta: {x: 591.4, y: 84.4}
+  m_AnchoredPosition: {x: -70.6, y: 894.4}
+  m_SizeDelta: {x: 591.4, y: 120.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1054829947
 MonoBehaviour:
@@ -3137,7 +3137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 491, y: 1245.8999}
+  m_AnchoredPosition: {x: 483.2, y: 1106.8999}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1181168318
@@ -4303,6 +4303,7 @@ MonoBehaviour:
   selected: 0
   account: 0
   nombre: {fileID: 1054829947}
+  eating: 0
 --- !u!4 &1579849180
 Transform:
   m_ObjectHideFlags: 0
@@ -4329,8 +4330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b03af2e5ccc6e4993659d323b80fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  Score: 0
   Carne: 0
   Lacteos: 0
   Verduras: 0
@@ -4352,6 +4351,16 @@ MonoBehaviour:
   verduras_f: 0
   cereales_f: 0
   frutas_f: 0
+  eatenCarne: 0
+  eatenLacteos: 0
+  eatenVerduras: 0
+  eatenCereales: 0
+  eatenFrutas: 0
+  destroyedDulces: 0
+  excesos: 0
+  Score: 0
+  health: 0
+  edad: 10
 --- !u!114 &1579849182
 MonoBehaviour:
   m_ObjectHideFlags: 0

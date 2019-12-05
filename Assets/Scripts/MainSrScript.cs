@@ -20,6 +20,7 @@ public class MainSrScript : MonoBehaviour
             startBTN.GetComponent<Button>().interactable = true;
         else
             startBTN.GetComponent<Button>().interactable = false;
+
         
     }
 

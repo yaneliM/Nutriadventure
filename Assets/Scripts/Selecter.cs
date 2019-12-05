@@ -15,12 +15,16 @@ public class Selecter : MonoBehaviour
     public GameObject Spoon;
     
     public Swipe_motion SM;
+
     RaycastHit hitInfo;
     RaycastHit HCInfo;
 	GameObject ob;
     public bool selected = false;
     public bool account = false;
     public Text nombre;
+    public int eating = 0;
+
+
    
    void Selected()
     {
@@ -37,7 +41,7 @@ public class Selecter : MonoBehaviour
     {
        return (selected == true ? true : false);
     }
-
+// OnEat
     public void Eat()
     {
         gyro.enabled = true;
@@ -45,6 +49,7 @@ public class Selecter : MonoBehaviour
         DESTROY.SetActive(false);
         Switcher.SetActive(true);
         
+        eating = 2;
 
         //Debug.Log("A comer");
         ob = HCInfo.transform.gameObject;
@@ -113,9 +118,15 @@ public class Selecter : MonoBehaviour
 		
 		Destroy(ob);
         nombre.text = "";
+        eating = 0;
+        Spoon.SetActive(false);
+        Fork.SetActive(false);
+        Bomb.SetActive(false);
+        Rocket.SetActive(false);
+         Switcher.SetActive(false);
 		
 	}
-
+//  OnDestroy
     public void Discard()
     {
         gyro.enabled = true;
@@ -123,6 +134,7 @@ public class Selecter : MonoBehaviour
         DESTROY.SetActive(false);
         Switcher.SetActive(true);
         
+        eating = 5;
         //Debug.Log("Al hielo <the godfather>");
         ob = HCInfo.transform.gameObject;
         Debug.Log(ob.name);
@@ -137,6 +149,7 @@ public class Selecter : MonoBehaviour
     {
         gyro = Input.gyro;
         SM = FindObjectOfType<Swipe_motion>();
+
     }
 
     // Update is called once per frame
@@ -170,4 +183,8 @@ public class Selecter : MonoBehaviour
     account = false;
 		
 	}
+
+    public int GetOption(){
+        return eating;
+    }
 }

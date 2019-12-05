@@ -56,8 +56,10 @@ public class EndEMngrScrpt : MonoBehaviour
             PlayerPrefs.Save();
         }
         //Despues se va al mapa de niveles
-        
-        SceneManager.LoadScene("MapNGoals");
+        if(PlayerPrefs.GetInt("currentEtapa") < 4 ) SceneManager.LoadScene("MapNGoals");
+        //Para la etapa "4" que seria la finalizacion del juego, se abre un reto 
+        else SceneManager.LoadScene("Reto");
+
     }
 
     public void OnRedo(){
@@ -71,7 +73,8 @@ public class EndEMngrScrpt : MonoBehaviour
         PlayerPrefs.Save();
         Debug.Log("End etapa to reto o game"); 
         //Para las etapas 1 2 3 , se abre un juego
-        if(PlayerPrefs.GetInt("currentEtapa") < 4 ) SceneManager.LoadScene("Game");
+
+        if(PlayerPrefs.GetInt("currentEtapa") < 4 ) SceneManager.LoadScene("MapNGoals");
         //Para la etapa "4" que seria la finalizacion del juego, se abre un reto 
         else SceneManager.LoadScene("Reto");
     }

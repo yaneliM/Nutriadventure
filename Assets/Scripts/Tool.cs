@@ -27,6 +27,7 @@ public class Tool : MonoBehaviour
 		SP.remove_foe(other.transform.gameObject.GetComponent<G_Foes>());
 		selecter.Set_selected();
 		selecter.Disapear();
+
 		Debug.Log("Collision");
         //Delete at the end of the collition
 		

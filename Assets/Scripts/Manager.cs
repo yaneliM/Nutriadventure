@@ -72,20 +72,19 @@ public class Manager : MonoBehaviour
     public void Gameover()
     {
 
-
-        if(SB.carne_f && SB.cereales_f && 
-        SB.frutas_f && SB.lacteos_f && 
-        SB.verduras_f)
+        //Si se completaron todas las metas
+        if(SB.carne_f && SB.cereales_f && SB.frutas_f && SB.lacteos_f && SB.verduras_f)
         {
 
             Debug.Log("Ganaste");
             PlayerPrefs.SetString("gameOver","Correcto");
-            PlayerPrefs.SetInt("score",SB.score_value());
             PlayerPrefs.Save();
+            //Solo cuando se termina el juego correctamente se actualizan todas las variables acumulativas
+            SaveUpdateVariables();
             SceneManager.LoadScene("ENDetapa");
         }
 
-        if(SB.total>=15)
+        if(SB.excesos>=15)
         {
             Debug.Log("Perdiste por excesos");
             PlayerPrefs.SetString("gameOver","Exceso");
@@ -94,7 +93,7 @@ public class Manager : MonoBehaviour
             SceneManager.LoadScene("ENDetapa");
         }
 
-        if(SB.health <= 10)
+        if(SB.health <= 5)
         {
 
             Debug.Log("Muerto");
@@ -106,7 +105,21 @@ public class Manager : MonoBehaviour
         }
     }
 
+    public void SaveUpdateVariables(){
+
+        //En cada etapa, se actuliza el valor del pref, el actual + lo acumulado, par atomarse encuenta
+        // al final del nivel donde se reinician a 0
+        PlayerPrefs.SetInt("score",SB.score_value()); //score de etapa
+        PlayerPrefs.SetInt("totalScore", SB.score_value() + PlayerPrefs.GetInt("totalScore"));  //para score final de nivel
+        PlayerPrefs.SetInt("totalHealth", SB.health_value() + PlayerPrefs.GetInt("totalHealth") );
+        PlayerPrefs.SetInt("totalCarne",SB.eatenCarne_value() + PlayerPrefs.GetInt("totalCarne") );
+        PlayerPrefs.SetInt("totalLacteos",SB.eatenLacteos_value() + PlayerPrefs.GetInt("totalLacteos") );
+        PlayerPrefs.SetInt("totalVerduras",SB.eatenVerduras_value() + PlayerPrefs.GetInt("totalVerduras") );
+        PlayerPrefs.SetInt("totalCereales",SB.eatenCereales_value() + PlayerPrefs.GetInt("totalCereales") );
+        PlayerPrefs.SetInt("totalFrutas",SB.eatenFrutas_value() + PlayerPrefs.GetInt("totalFrutas") );
+
+        PlayerPrefs.SetInt("totalDulces",SB.destroyedDulces_value() + PlayerPrefs.GetInt("totalDulces") );
+        PlayerPrefs.Save();
+    }
+
 }
-
-
-

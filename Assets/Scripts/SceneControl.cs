@@ -66,8 +66,9 @@ public class SceneControl : MonoBehaviour
     public void OnNextLevel(){
         //Cuando se presione siguiente nivel, se debe actualizar currentLevel y llevarlo al mapa de niveles
         
-        //PlayerPrefs.SetInt("currentLevel",PlayerPrefs.GetInt("currentLevel")+1);
-        //PlayerPrefs.Save();
+        PlayerPrefs.SetInt("currentLevel",PlayerPrefs.GetInt("currentLevel")+1);
+        PlayerPrefs.SetInt("currentEtapa",1);
+        PlayerPrefs.Save();
         SceneManager.LoadScene("MapNGoals");
     }
 }
