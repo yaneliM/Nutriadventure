@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,10 @@ public class MainSrScript : MonoBehaviour
     public MainScrStates current;
     //Menu Canvas Objects
     public GameObject mainScr, badgesScr, profileScr,infoScr;
+    
+    public InputField name_Input,age_Input;
 
+    private int flg=0;
 
     void Awake(){
         current = MainScrStates.Main;
@@ -40,7 +43,16 @@ public class MainSrScript : MonoBehaviour
                 badgesScr.SetActive(false);
                 profileScr.SetActive(true);
                 infoScr.SetActive(false);
-
+                
+                name_Input = GameObject.Find("NAME_INPT").GetComponent<InputField>();
+                age_Input = GameObject.Find("AGE_INPT").GetComponent<InputField>();
+                PlayerData data = SaveSystem.LoadPlayer();
+                if(data != null && flg == 0){
+                    name_Input.text = data.name;
+                    age_Input.text = data.age.ToString();
+                    flg=1;
+                }
+                
             break;
 
             case MainScrStates.Info:
@@ -74,31 +86,43 @@ public class MainSrScript : MonoBehaviour
     public void OnProfile()
     {
         Debug.Log("Profile Canvas");
+        
+
+
+       
         current = MainScrStates.Profile;
+        
     }
     //To cancel badges viewing
     public void OnCancel()
     {
+       
         Debug.Log("Back to Main");
         current = MainScrStates.Main;
     }
     //To go back to mainMenu
     public void OnBack()
     {
+       
         Debug.Log("Back to Main");
         current = MainScrStates.Main;
     }
     //To save profile
     public void OnSave()
     {
-        Debug.Log("Back to Main");
+        name_Input = GameObject.Find("NAME_INPT").GetComponent<InputField>();
+        age_Input = GameObject.Find("AGE_INPT").GetComponent<InputField>();
+        if(name_Input != null && age_Input != null)
+            SaveSystem.SavePlayer(this);
+        Debug.Log("Back to Main Saved");
         current = MainScrStates.Main;
     }
 
     //Stop editing
-    //AQUI DEBE INCLUIRSE LO DE GUARDAR LA INFORMACION
     public void OnWriteEnd(){
         Debug.Log("END editing");
 
     }
+    
+
 }

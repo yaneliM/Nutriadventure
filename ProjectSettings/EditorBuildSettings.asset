@@ -5,25 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Main.unity
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/64a8cc2381ac7704e9ad54b78f9f0020
     guid: 64a8cc2381ac7704e9ad54b78f9f0020
   - enabled: 1
     path: Assets/Scenes/Comic.unity
     guid: 56614a8ca9d58f44dbb1bc78d93b4f20
   - enabled: 1
     path: Assets/Scenes/Game.unity
-    guid: a95cd8e971a0d5f4292733a2f0375e83
+    guid: 49dd979e65748a64eb62d83320add7c0
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 1daf1a9d608a4d74e95af0d9db4d25f4
+  - enabled: 1
+    path: Assets/Scenes/ENDetapa.unity
+    guid: b42c2813fdf85b442ad16cadc4e327e5
+  - enabled: 1
+    path: Assets/Scenes/ENDNivel.unity
+    guid: 5bba83776f664504896622dd7b2d3e9f
   - enabled: 1
     path: Assets/Scenes/MapNGoals.unity
-    guid: 51cc0f76cc4058b4f84d0db6b8597a63
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    guid: ec7f41068385f9f43bca9e114c1b121d
+  - enabled: 1
+    path: Assets/Scenes/Reto.unity
+    guid: 4d8e458c63110744b9178a1508ac538e
   m_configObjects: {}

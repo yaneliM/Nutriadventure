@@ -9,13 +9,14 @@ public class LevelBtnController : MonoBehaviour
     //Estan estan como public para poder simular valores reales... se supone que estos valores se consiguen de lo que esta guardado
     public int currentLevel;
     public int currentEtapa;
+    public int edad;
     /////////////////////////////////////////
     private int i,j;
     // Start is called before the first frame update
     public enum GoalsStates {Desayuno,Comida,Cena,Metas,Badges};
     public GoalsStates current;
     //Menu Canvas Objects
-    public GameObject DesayunoScr, ComidaScr, CenaScr,MetaScr,BadgesScr;
+    public GameObject Desayuno1,Desayuno2, Comida1,Comida2,Comida3, Cena1,Cena2, MetaScr,BadgesScr;
 
 
     void Start()
@@ -53,42 +54,88 @@ public class LevelBtnController : MonoBehaviour
        switch (current)
         {
             case GoalsStates.Desayuno:
-                DesayunoScr.SetActive(true);
-                ComidaScr.SetActive(false);
-                CenaScr.SetActive(false);
+                Comida1.SetActive(false);
+                Comida2.SetActive(false);
+                Comida3.SetActive(false);
+                Cena1.SetActive(false);
+                Cena2.SetActive(false);
                 MetaScr.SetActive(false);
                 BadgesScr.SetActive(false);
+                if(edad <= 9){
+                    Desayuno1.SetActive(true);
+                    Desayuno2.SetActive(false);
+                }
+                else{
+                    Desayuno2.SetActive(true);
+                    Desayuno1.SetActive(false);
+                }
             break;
 
             case GoalsStates.Comida:
-                DesayunoScr.SetActive(false);
-                ComidaScr.SetActive(true);
-                CenaScr.SetActive(false);
+                Desayuno1.SetActive(false);
+                Desayuno2.SetActive(false);
+                Cena1.SetActive(false);
+                Cena2.SetActive(false);
                 MetaScr.SetActive(false);
                 BadgesScr.SetActive(false);
+                if(edad <=6){
+                    Comida1.SetActive(true);
+                    Comida2.SetActive(false);
+                    Comida3.SetActive(false);
+                }
+                else if(edad >=7 && edad <=9){
+                    Comida1.SetActive(false);
+                    Comida2.SetActive(true);
+                    Comida3.SetActive(false);
+                }
+                else if(edad >= 10){
+                    Comida1.SetActive(false);
+                    Comida2.SetActive(false);
+                    Comida3.SetActive(true);
+                }
             break;
 
             case GoalsStates.Cena:
-                DesayunoScr.SetActive(false);
-                ComidaScr.SetActive(false);
-                CenaScr.SetActive(true);
+                Desayuno1.SetActive(false);
+                Desayuno2.SetActive(false);
+                Comida1.SetActive(false);
+                Comida2.SetActive(false);
+                Comida3.SetActive(false);
                 MetaScr.SetActive(false);
                 BadgesScr.SetActive(false);
+                if(edad <= 6){
+                    Cena1.SetActive(true);
+                    Cena2.SetActive(false);
+                }
+                else{
+                    Cena1.SetActive(false);
+                    Cena2.SetActive(true);
+                }
 
             break;
 
             case GoalsStates.Metas:
-                DesayunoScr.SetActive(false);
-                ComidaScr.SetActive(false);
-                CenaScr.SetActive(false);
+                Desayuno1.SetActive(false);
+                Desayuno2.SetActive(false);
+                Comida1.SetActive(false);
+                Comida2.SetActive(false);
+                Comida3.SetActive(false);
+                Cena1.SetActive(false);
+                Cena2.SetActive(false);
+                
                 MetaScr.SetActive(true);
                 BadgesScr.SetActive(false);
             break;
 
             case GoalsStates.Badges:
-                DesayunoScr.SetActive(false);
-                ComidaScr.SetActive(false);
-                CenaScr.SetActive(false);
+                Desayuno1.SetActive(false);
+                Desayuno2.SetActive(false);
+                Comida1.SetActive(false);
+                Comida2.SetActive(false);
+                Comida3.SetActive(false);
+                Cena1.SetActive(false);
+                Cena2.SetActive(false);
+
                 MetaScr.SetActive(false);
                 BadgesScr.SetActive(true);
             break;
@@ -101,7 +148,7 @@ public class LevelBtnController : MonoBehaviour
         Debug.Log("Desayuno");
         /*Esta parte deberia llevar al canvas correcto
         asi que deberia checar el valor edad para saber a cual ir */
-        //current = GoalsStates.Desayuno;
+        current = GoalsStates.Desayuno;
     }
 
     public void OnSecondEtapa()
@@ -109,7 +156,7 @@ public class LevelBtnController : MonoBehaviour
         Debug.Log("Comida");
         /*Esta parte deberia llevar al canvas correcto
         asi que deberia checar el valor edad para saber a cual ir */
-        //current = GoalsStates.Comida;
+        current = GoalsStates.Comida;
     }
 
     public void OnThirdEtapa()
@@ -117,7 +164,7 @@ public class LevelBtnController : MonoBehaviour
         Debug.Log("Cena");
         /*Esta parte deberia llevar al canvas correcto
         asi que deberia checar el valor edad para saber a cual ir */
-        //current = GoalsStates.Cena;
+        current = GoalsStates.Cena;
     }
 
     //si se preciona la TACHA, regresa a la pagina principal
