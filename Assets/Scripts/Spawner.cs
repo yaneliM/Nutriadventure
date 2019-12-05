@@ -7,18 +7,18 @@ public class Spawner : MonoBehaviour
 {
   //	public Aux_Foe List_prefabs;
 	
-	public List<Foes> Foe_List = new List<Foes>(); 
+	//public List<G_Foes> Foe_List = new List<G_Foes>(); 
+
 	private int ct_frame;
 	private int ct_sec;
-	private int ct_enemies;
+	public int ct_enemies;
 	//Crear lista 
  	
 
 
-	private string[,] lista_comida = new string[,] {{"Banana","ManzanaM","NaranajaM","NaranjaC","Paleta"},//Desayuno
-													  {"Carne","ManzanaM","NaranajaM","NaranjaC","Paleta"},//comida
-													  {"Carne","ManzanaM","NaranajaM","NaranjaC","Paleta"}};//Cena
-
+	private string[] lista_comida = new string[] {"Banana","ManzanaM","NaranajaM","NaranjaC","Paleta","Eggs","Leche","Nieve","Carne"
+													,"Pepino","Pollo","Queso","Sandia","Pastel","Dulce","BoiledEgg","Cereza","Fresa"
+													,"Yogurt","Tortillas","Pan","Arroz","Bolillo","Hotcakes"};
 
 
 	// Start is called before the first frame update
@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ct_enemies = Foe_List.Count;
+		
 		
 		ct_frame++;
 		if(ct_frame == 30)
@@ -39,11 +39,11 @@ public class Spawner : MonoBehaviour
 			ct_frame = 0;
 			ct_sec++;
 			
-			if(ct_sec == 5)
+			if(ct_sec == 1)
 			{
 			
 				ct_sec = 0;
-				if(ct_enemies <= 15)
+				if(ct_enemies <= 30)
 					Spawn();
 			
 			}
@@ -52,14 +52,21 @@ public class Spawner : MonoBehaviour
 			
 	}
 	
+	public void remove_foe(G_Foes g)
+	{	
+		Debug.Log("Comida eliminada"+g.Name);
+		ct_enemies--;
+	
+	}
+
 	public void Spawn()
 	{
 
-		G_Foes food = Resources.Load(lista_comida[0,Random.Range(0,5)],typeof(G_Foes))as G_Foes;
+		G_Foes food = Resources.Load(lista_comida[Random.Range(0,lista_comida.Length)],typeof(G_Foes))as G_Foes;
 		Instantiate(food,Spawn_position(),Quaternion.identity);
 		//Debug.Log(food.name);
-		Foe_List.Add(food);
-		
+		//Foe_List.Add(food);
+		ct_enemies++;
 	}
 
 	Vector3 Spawn_position()

@@ -10,13 +10,17 @@ public class MainSrScript : MonoBehaviour
     public MainScrStates current;
     //Menu Canvas Objects
     public GameObject mainScr, badgesScr, profileScr,infoScr;
-    
+    public GameObject startBTN;
     public InputField name_Input,age_Input;
 
-    private int flg=0;
-
-    void Awake(){
+   
+    void Start(){
         current = MainScrStates.Main;
+        if(PlayerPrefs.GetString("edad") != "" && PlayerPrefs.GetString("nombre") != "")
+            startBTN.GetComponent<Button>().interactable = true;
+        else
+            startBTN.GetComponent<Button>().interactable = false;
+        
     }
 
     void Update(){
@@ -46,12 +50,7 @@ public class MainSrScript : MonoBehaviour
                 
                 name_Input = GameObject.Find("NAME_INPT").GetComponent<InputField>();
                 age_Input = GameObject.Find("AGE_INPT").GetComponent<InputField>();
-                PlayerData data = SaveSystem.LoadPlayer();
-                if(data != null && flg == 0){
-                    name_Input.text = data.name;
-                    age_Input.text = data.age.ToString();
-                    flg=1;
-                }
+
                 
             break;
 
@@ -86,37 +85,46 @@ public class MainSrScript : MonoBehaviour
     public void OnProfile()
     {
         Debug.Log("Profile Canvas");
-        
 
-
-       
         current = MainScrStates.Profile;
+        if(PlayerPrefs.GetString("edad") != null && PlayerPrefs.GetString("nombre") != null)
+            name_Input.text = PlayerPrefs.GetString("nombre");
+            age_Input.text = PlayerPrefs.GetString("edad");
         
     }
     //To cancel badges viewing
     public void OnCancel()
     {
-       
         Debug.Log("Back to Main");
         current = MainScrStates.Main;
     }
     //To go back to mainMenu
     public void OnBack()
     {
-       
         Debug.Log("Back to Main");
         current = MainScrStates.Main;
+
     }
     //To save profile
     public void OnSave()
     {
-        name_Input = GameObject.Find("NAME_INPT").GetComponent<InputField>();
-        age_Input = GameObject.Find("AGE_INPT").GetComponent<InputField>();
-        if(name_Input != null && age_Input != null)
-            SaveSystem.SavePlayer(this);
-        Debug.Log("Back to Main Saved");
+     if(age_Input.text != "" && name_Input.text != ""){
+            PlayerPrefs.SetString("edad",age_Input.text);
+            PlayerPrefs.SetString("nombre",name_Input.text);
+            PlayerPrefs.Save();
+            Debug.Log("Edad is:" + PlayerPrefs.GetString("edad"));
+            Debug.Log("Name is:" + PlayerPrefs.GetString("nombre"));
+            startBTN.GetComponent<Button>().interactable = true;
+        }
+        else startBTN.GetComponent<Button>().interactable = false;
+
+
+    Debug.Log("edad: "+ int.Parse(PlayerPrefs.GetString("edad")));
+
         current = MainScrStates.Main;
     }
+       
+        
 
     //Stop editing
     public void OnWriteEnd(){

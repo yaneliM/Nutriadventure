@@ -6,17 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/__DELETED_GUID_Trash/64a8cc2381ac7704e9ad54b78f9f0020
-    guid: 64a8cc2381ac7704e9ad54b78f9f0020
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 1daf1a9d608a4d74e95af0d9db4d25f4
   - enabled: 1
     path: Assets/Scenes/Comic.unity
     guid: 56614a8ca9d58f44dbb1bc78d93b4f20
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 49dd979e65748a64eb62d83320add7c0
-  - enabled: 1
-    path: Assets/Scenes/Main.unity
-    guid: 1daf1a9d608a4d74e95af0d9db4d25f4
   - enabled: 1
     path: Assets/Scenes/ENDetapa.unity
     guid: b42c2813fdf85b442ad16cadc4e327e5

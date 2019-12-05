@@ -6,28 +6,46 @@ using UnityEngine.SceneManagement;
 
 public class LevelBtnController : MonoBehaviour
 {
-    //Estan estan como public para poder simular valores reales... se supone que estos valores se consiguen de lo que esta guardado
-    public int currentLevel;
-    public int currentEtapa;
-    public int edad;
+    //se consiguen de lo que esta guardado
+    int currentLevel = 1;
+    int currentEtapa = 1;
+    int edad;
     /////////////////////////////////////////
     private int i,j;
     // Start is called before the first frame update
-    public enum GoalsStates {Desayuno,Comida,Cena,Metas,Badges};
+    public enum GoalsStates {Desayuno,Comida,Cena,Metas,Badges,Sabias,Instrucciones};
     public GoalsStates current;
+    public GoalsStates last;
     //Menu Canvas Objects
-    public GameObject Desayuno1,Desayuno2, Comida1,Comida2,Comida3, Cena1,Cena2, MetaScr,BadgesScr;
+    public GameObject Desayuno1,Desayuno2, Comida1,Comida2,Comida3, Cena1,Cena2, MetaScr,BadgesScr,SabiasScr, Instrucc;
+    
+    public GameObject SabiasQ0,SabiasQ1,SabiasQ2,SabiasQ3,SabiasQ4,SabiasQ5,SabiasQ6,SabiasQ7,SabiasQ8,SabiasQ9,SabiasQ10,SabiasQ11,SabiasQ12,SabiasQ13,SabiasQ14,SabiasQ15;
 
+
+//current sabias que
 
     void Start()
     {
-        current = GoalsStates.Metas;
+
+        if(PlayerPrefs.GetInt("currentLevel") != 0 && PlayerPrefs.GetInt("currentEtapa") != 0 ){
+            currentLevel = PlayerPrefs.GetInt("currentLevel",0);
+            currentEtapa = PlayerPrefs.GetInt("currentEtapa",0);
+            edad = int.Parse(PlayerPrefs.GetString("edad"));
+        }
+        else{
+            PlayerPrefs.SetInt("currentLevel",1);
+            PlayerPrefs.SetInt("currentEtapa",1);
+            PlayerPrefs.Save();
+        }
+
+        Debug.Log("Level: "+PlayerPrefs.GetInt("currentLevel")+" Etapa: "+PlayerPrefs.GetInt("currentEtapa")+" Edad: "+PlayerPrefs.GetString("edad"));
+         current = GoalsStates.Metas;
         /*Con esto al cargarse se ponen todos los botones desactivados */
         for(i=1; i<=7;i++){
             for(j=1; j<=3; j++){
-                Debug.Log(i+""+j+"BTN false");
+                
                 GameObject.Find(i+""+j+"BTN").GetComponent<Button>().interactable = false;
-                Debug.Log(i+""+j+"BTN false");
+                
             }
         }
 
@@ -35,17 +53,20 @@ public class LevelBtnController : MonoBehaviour
         for(i=1; i<currentLevel;i++){
             for(j=1; j<=3; j++){
                 GameObject.Find(i+""+j+"BTN").GetComponent<Button>().interactable = true;
-                Debug.Log(i+""+j+"BTN true");
+                
             }
         }
 
         /*Con esto se toma en cuenta solo el nivel actual para activar las etapas anteriores y la actual */
         for(j=1; j<=currentEtapa; j++){
                 GameObject.Find(currentLevel+""+j+"BTN").GetComponent<Button>().interactable = true;
-                Debug.Log(i+""+j+"BTN true");
+               
             }
- 
+    
+        AllInactive();
+        
     }
+
 
 
     // Update is called once per frame
@@ -61,6 +82,8 @@ public class LevelBtnController : MonoBehaviour
                 Cena2.SetActive(false);
                 MetaScr.SetActive(false);
                 BadgesScr.SetActive(false);
+                SabiasScr.SetActive(false);
+                Instrucc.SetActive(false);
                 if(edad <= 9){
                     Desayuno1.SetActive(true);
                     Desayuno2.SetActive(false);
@@ -78,6 +101,8 @@ public class LevelBtnController : MonoBehaviour
                 Cena2.SetActive(false);
                 MetaScr.SetActive(false);
                 BadgesScr.SetActive(false);
+                SabiasScr.SetActive(false);
+                Instrucc.SetActive(false);
                 if(edad <=6){
                     Comida1.SetActive(true);
                     Comida2.SetActive(false);
@@ -103,6 +128,8 @@ public class LevelBtnController : MonoBehaviour
                 Comida3.SetActive(false);
                 MetaScr.SetActive(false);
                 BadgesScr.SetActive(false);
+                SabiasScr.SetActive(false);
+                Instrucc.SetActive(false);
                 if(edad <= 6){
                     Cena1.SetActive(true);
                     Cena2.SetActive(false);
@@ -122,9 +149,10 @@ public class LevelBtnController : MonoBehaviour
                 Comida3.SetActive(false);
                 Cena1.SetActive(false);
                 Cena2.SetActive(false);
-                
+                SabiasScr.SetActive(false);
                 MetaScr.SetActive(true);
                 BadgesScr.SetActive(false);
+                Instrucc.SetActive(false);
             break;
 
             case GoalsStates.Badges:
@@ -135,9 +163,37 @@ public class LevelBtnController : MonoBehaviour
                 Comida3.SetActive(false);
                 Cena1.SetActive(false);
                 Cena2.SetActive(false);
-
+                SabiasScr.SetActive(false);
                 MetaScr.SetActive(false);
                 BadgesScr.SetActive(true);
+                Instrucc.SetActive(false);
+            break;
+            case GoalsStates.Sabias:
+                Desayuno1.SetActive(false);
+                Desayuno2.SetActive(false);
+                Comida1.SetActive(false);
+                Comida2.SetActive(false);
+                Comida3.SetActive(false);
+                Cena1.SetActive(false);
+                Cena2.SetActive(false);
+                SabiasScr.SetActive(true);
+                MetaScr.SetActive(false);
+                BadgesScr.SetActive(false);
+                Instrucc.SetActive(false);
+            break;
+                        
+            case GoalsStates.Instrucciones:
+                Desayuno1.SetActive(false);
+                Desayuno2.SetActive(false);
+                Comida1.SetActive(false);
+                Comida2.SetActive(false);
+                Comida3.SetActive(false);
+                Cena1.SetActive(false);
+                Cena2.SetActive(false);
+                SabiasScr.SetActive(false);
+                MetaScr.SetActive(false);
+                BadgesScr.SetActive(false);
+                Instrucc.SetActive(true);
             break;
 
         }
@@ -187,32 +243,137 @@ public class LevelBtnController : MonoBehaviour
         current = GoalsStates.Badges;
     }
 
-    //En las metas, el signo de interrogacion, abre otros canvas (que no he hecho) con las instrucciones
-    public void OnInstruction(){
-        Debug.Log("Abrir panel de instrucciones");
+        public void OnInstruction()
+    {
+        Debug.Log("Instrucctions");
+        last = current;
+        current = GoalsStates.Instrucciones;
     }
+
+    public void OnCloseInstrucc(){
+        Debug.Log("Back to meta");
+        current = last;
+    }
+
+    public void OnStartGame(){
+        Debug.Log("start");
+        SceneManager.LoadScene("Game");
+
+    }
+
+    //En las metas, el signo de interrogacion, abre otros canvas (que no he hecho) con las instrucciones
+
 
     //En las metas, con el play llevaria a algun canvas random con "sabias que...?" (que no he hecho)
     public void OnPlay(){
-        Debug.Log("Aqui van canvas de sabias que y luego el juego");
+        Debug.Log("meta to sabias que");
+        //Desactivar la meta que este
+        current = GoalsStates.Sabias;        
+        SabiasScr.SetActive(true);
+        AllInactive();
+        int n = Random.Range(1, 17);
+        GetOneSabiasQueCanvas(n);
+    }
 
-        //Como es la misma funcion para todas las metas
-        //Aqui deberia haber esa diferenciacion de que abra la escena del juego, pero que se sepa
-        //Que tipos de cosas pueden o no salir
-        switch(current){
-            case GoalsStates.Desayuno:
-                //SceneManager.LoadScene("GameDesayuno");
-            break;
-
-            case GoalsStates.Comida:
-               //SceneManager.LoadScene("GameComida");
-            break;
-
-            case GoalsStates.Cena:
-                //SceneManager.LoadScene("GameCena");
-            break;
-        }
-
+    public void AllInactive(){
+        SabiasQ0.SetActive(false);
+        SabiasQ1.SetActive(false);
+        SabiasQ2.SetActive(false);
+        SabiasQ3.SetActive(false);
+        SabiasQ4.SetActive(false);
+        SabiasQ5.SetActive(false);
+        SabiasQ6.SetActive(false);
+        SabiasQ7.SetActive(false);
+        SabiasQ8.SetActive(false);
+        SabiasQ9.SetActive(false);
+        SabiasQ10.SetActive(false);
+        SabiasQ11.SetActive(false);
+        SabiasQ12.SetActive(false);
+        SabiasQ13.SetActive(false);
+        SabiasQ14.SetActive(false);
+        SabiasQ15.SetActive(false);
 
     }
+
+    public void GetOneSabiasQueCanvas(int index){
+        switch(index){
+            case 1:
+                SabiasQ0.SetActive(true);
+                break;
+            case 2:
+                SabiasQ1.SetActive(true);
+                break;
+            case 3:
+                SabiasQ2.SetActive(true);
+                break;
+            case 4:
+                SabiasQ3.SetActive(true);
+                break;
+            case 5:
+                SabiasQ4.SetActive(true);
+                break;
+            case 6:
+                SabiasQ5.SetActive(true);
+                break;
+            case 7:
+                SabiasQ6.SetActive(true);
+                break;
+            case 8:
+                SabiasQ7.SetActive(true);
+                break;
+            case 9:
+                SabiasQ8.SetActive(true);
+                break;
+            case 10:
+                SabiasQ9.SetActive(true);
+                break;
+            case 11:
+                SabiasQ10.SetActive(true);
+                break;
+            case 12:
+                SabiasQ11.SetActive(true);
+                break;
+            case 13:
+                SabiasQ12.SetActive(true);
+                break;
+            case 14:
+                SabiasQ13.SetActive(true);
+                break;
+            case 15:
+                SabiasQ14.SetActive(true);
+                break;
+            case 16:
+                SabiasQ15.SetActive(true);
+                break;
+            default:
+            break;
+        }
+    }
+
+    public void SetUpLevels(){
+        current = GoalsStates.Metas;
+        /*Con esto al cargarse se ponen todos los botones desactivados */
+        for(i=1; i<=7;i++){
+            for(j=1; j<=3; j++){
+                Debug.Log(i+""+j+"BTN false");
+                GameObject.Find(i+""+j+"BTN").GetComponent<Button>().interactable = false;
+                Debug.Log(i+""+j+"BTN false");
+            }
+        }
+
+        /*Con esto, los botones de los niveles anteriores al actual se ponen activos */
+        for(i=1; i<currentLevel;i++){
+            for(j=1; j<=3; j++){
+                GameObject.Find(i+""+j+"BTN").GetComponent<Button>().interactable = true;
+                Debug.Log(i+""+j+"BTN true");
+            }
+        }
+
+        /*Con esto se toma en cuenta solo el nivel actual para activar las etapas anteriores y la actual */
+        for(j=1; j<=currentEtapa; j++){
+                GameObject.Find(currentLevel+""+j+"BTN").GetComponent<Button>().interactable = true;
+                Debug.Log(i+""+j+"BTN true");
+            }
+    
+    }       
 }
